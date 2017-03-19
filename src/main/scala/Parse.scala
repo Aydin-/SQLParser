@@ -1,4 +1,6 @@
-package sqlparse
+package sqlparser
+
+import SQLParseRules._
 
 object Parse {
 	val parseMe = "parse-test.sql"
