@@ -8,6 +8,6 @@ import scala.annotation.tailrec
 import SQLAST._
 
 object SQLParseRules extends StandardTokenParsers with PackratParsers with Parsers {
-	lexical.reserved += ()
-	lazy val dummyRule: A = "a" ~ ident ^^ { case "a" ~ vv => A(vv) }
+	lexical.reserved += ( "," )
+	lazy val dummyRule: Parser[A] = "a" ~ ident ^^ { case "a" ~ vv => A(vv) }
 }
