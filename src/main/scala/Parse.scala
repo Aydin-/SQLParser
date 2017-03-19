@@ -9,7 +9,7 @@ object Parse {
 	}
 
 	def parseFromFile( file: String ) = {
-		dummyRule(
+		ARule(
 			new PackratReader( new lexical.Scanner( scala.io.Source.fromFile( file, "utf-8" ).getLines.mkString( "\n" )))
 		)
 	}
