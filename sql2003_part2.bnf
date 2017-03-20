@@ -1,179 +1,21 @@
 ganked from: https://raw.githubusercontent.com/ronsavage/SQL/master/sql-2003-2.bnf
 
-BNF Grammar for ISO/IEC 9075-2:2003 - Database Language SQL (SQL-2003) SQL/Foundation
-=====================================================================================
-
-@(#)$Id: sql-2003-2.bnf,v 1.19 2016/07/24 15:30:25 jleffler Exp $
-
---p
-Information taken from the Final Committee Draft (FCD) of ISO/IEC 9075-2:2003.
-However, the page numbers and some section titles (9.14 through 9.23,
-for example) are from the final standard.
-This means there could be other as yet undiagnosed differences between
-the final standard and the notation in this document; you were warned!
---/p
-
---p
-The plain text version of this grammar is
---## <a href='sql-2003-2.bnf'> sql-2003-2.bnf </a>.
---/p
-
---hr
---h2 Key SQL Statements and Fragments
---/h2
---bl
---li ALTER DOMAIN <alter domain statement>
---li ALTER TABLE <alter table statement>
---li CLOSE cursor <close statement>
---li Column definition <column definition>
---li COMMIT WORK <commit statement>
---li CONNECT <connect statement>
---li CREATE ASSERTION <assertion definition>
---li CREATE CHARACTER SET <character set definition>
---li CREATE COLLATION <collation definition>
---li CREATE DOMAIN <domain definition>
---li CREATE FUNCTION <schema function>
---li CREATE PROCEDURE <schema procedure>
---li CREATE SCHEMA <schema definition>
---li CREATE TABLE <table definition>
---li CREATE TRANSLATION <translation definition>
---li CREATE TRIGGER <trigger definition>
---li CREATE VIEW <view definition>
---li Data type <data type>
---li DEALLOCATE PREPARE <deallocate prepared statement>
---li DECLARE cursor <declare cursor> <dynamic declare cursor>
---li DECLARE LOCAL TEMPORARY TABLE <temporary table declaration>
---li DELETE <delete statement: positioned> <delete statement: searched> <dynamic delete statement: positioned>
---li DESCRIBE <describe statement>
---li DESCRIPTOR statements <system descriptor statement>
---li DISCONNECT <disconnect statement>
---li EXECUTE <execute statement>
---li EXECUTE IMMEDIATE <execute immediate statement>
---li FETCH cursor <fetch statement>
---li FROM clause <from clause>
---li GET DIAGNOSTICS <get diagnostics statement>
---li GRANT <grant statement>
---li GROUP BY clause <group by clause>
---li HAVING clause <having clause>
---li INSERT <insert statement>
---li Literals <literal>
---li Keywords <key word>
---li MERGE <merge statement>
---li OPEN cursor <open statement>
---li ORDER BY clause <order by clause>
---li PREPARE <prepare statement>
---li REVOKE <revoke statement>
---li ROLLBACK WORK <rollback statement>
---li SAVEPOINT <savepoint statement>
---li Search condition <search condition> <regular expression>
---li SELECT <query specification>
---li SET CATALOG <set catalog statement>
---li SET CONNECTION <set connection statement>
---li SET CONSTRAINTS <set constraints mode statement>
---li SET NAMES <set names statement>
---li SET SCHEMA <set schema statement>
---li SET SESSION AUTHORIZATION <set session user identifier statement>
---li SET TIME ZONE <set local time zone statement>
---li SET TRANSACTION <set transaction statement>
---li SQL Client MODULE <SQL-client module definition>
---li UPDATE <update statement: positioned> <update statement: searched> <dynamic update statement: positioned>
---li Value expression <value expression>
---li WHERE clause <where clause>
---/bl
-
---hr
---h2 5 Lexical Elements
---/h2
-
---p
-Basic definitions of characters used, tokens, symbols, etc.
-Most of this section would normally be handled within the lexical
-analyzer rather than in the grammar proper.
-Further, the original document does not quote the various single
-characters, which makes it hard to process automatically.
---/p
-
---h3 5.1 <SQL terminal character> (p151)
---/h3
-
-<SQL terminal character> ::= <SQL language character>
-
-<SQL language character> ::= <simple Latin letter> | <digit> | <SQL special character>
-
-<simple Latin letter> ::= <simple Latin upper case letter> | <simple Latin lower case letter>
-
-<simple Latin upper case letter> ::=
-		A | B | C | D | E | F | G | H | I | J | K | L | M | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-
-<simple Latin lower case letter> ::=
-		a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
-
-<digit> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-
-<SQL special character> ::=
-		<space>
-	|	<double quote>
-	|	<percent>
-	|	<ampersand>
-	|	<quote>
-	|	<left paren>
-	|	<right paren>
-	|	<asterisk>
-	|	<plus sign>
-	|	<comma>
-	|	<minus sign>
-	|	<period>
-	|	<solidus>
-	|	<colon>
-	|	<semicolon>
-	|	<less than operator>
-	|	<equals operator>
-	|	<greater than operator>
-	|	<question mark>
-	|	<left bracket>
-	|	<right bracket>
-	|	<circumflex>
-	|	<underscore>
-	|	<vertical bar>
-	|	<left brace>
-	|	<right brace>
-
 <space> ::= !! See the Syntax Rules.
-
 <double quote> ::= "
-
 <percent> ::= %
-
 <ampersand> ::= &
-
 <quote> ::= '
-
-<left paren> ::= (
-
-<right paren> ::= )
-
 <asterisk> ::= *
-
 <plus sign> ::= +
-
 <comma> ::= ,
-
 <minus sign> ::= -
-
 <period> ::= .
-
 <solidus> ::= /
-
 <colon> ::= :
-
 <semicolon> ::= ;
-
 <less than operator> ::= <
-
 <equals operator> ::= =
-
 <greater than operator> ::= >
-
 <question mark> ::= ?
 
 --p
