@@ -1,0 +1,11 @@
+<left bracket or trigraph> ::= <left bracket> | <left bracket trigraph>
+<right bracket or trigraph> ::= <right bracket> | <right bracket trigraph>
+<left bracket> ::= [
+<left bracket trigraph> ::= ??(
+<right bracket> ::= ]
+<right bracket trigraph> ::= ??)
+<circumflex> ::= ^
+<underscore> ::= _
+<vertical bar> ::= |
+<left brace> ::= {
+<right brace> ::= }

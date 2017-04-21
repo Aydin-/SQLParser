@@ -1,0 +1,42 @@
+#!/bin/bash
+
+## convert bnf into scala parser
+#  yep, it's all magical regexes
+#  fuck you.
+
+# This needs to handle ands, not just ors.
+
+target=$1
+while read line; do
+	lhs=$(echo $line | sed 's/::=.*$//')
+	rhs=$(echo $line | sed 's/^.*::=//')
+	lhs=$(echo $lhs | gsed 's/ \([a-z]\)/\U\1/g' | sed 's/[><]//g' )
+	ruleType=$(echo $lhs | gsed 's/^\([a-z]\)/\U\1/')
+	decl=$(echo "lazy val $lhs: Parser[$ruleType]")
+
+	first="yes"
+	ors=$( echo $rhs | sed -e 's/\|/\'$'\n/g' | while read -r pr; do
+		result="" ; valid="no"
+		if   [[ "$pr" =~ ^\w*$ ]] ; then
+			: ;
+		elif [[ $pr =~ "<" ]] ; then
+			xx=$(echo $pr | sed 's/[><]//g' | gsed 's/ \([a-z]\)/\U\1/g')
+			result="$xx"
+			valid="yes"
+		else
+			result="\"$pr\""
+			valid="yes"
+		fi
+
+		if [ "$valid" == "yes" ] ; then
+			if [ "$first" == "yes" ] ; then
+				first="no"
+			else
+				result=" | $result "
+			fi
+			printf "$result"
+		fi
+	done)
+
+	echo "$decl = $ors"
+done <$target

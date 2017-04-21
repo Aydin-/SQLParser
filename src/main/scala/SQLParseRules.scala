@@ -34,4 +34,17 @@ object SQLParseRules extends StandardTokenParsers with PackratParsers with Parse
  	 	leftParen | rightParen | asterisk | plusSign | comma | minusSign | period | solidus | colon | semicolon |
 		lessThanOperator | equalsOperator | greaterThanOperator | questionMark | leftBracket | rightBracket | circumflex |
 		underscore | verticalBar | leftBrace | rightBrace
+	/*
+	<left bracket or trigraph> ::= <left bracket> | <left bracket trigraph>
+	<right bracket or trigraph> ::= <right bracket> | <right bracket trigraph>
+	<left bracket> ::= [
+	<left bracket trigraph> ::= ??(
+	<right bracket> ::= ]
+	<right bracket trigraph> ::= ??)
+	<circumflex> ::= ^
+	<underscore> ::= _
+	<vertical bar> ::= |
+	<left brace> ::= {
+	<right brace> ::= }
+	*/
 }
